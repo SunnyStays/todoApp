@@ -15,7 +15,7 @@ function addCheckbox(){
     const childrenCount = document.getElementById("list-container").childElementCount
     const input = document.getElementById('input-text')
     const id = childrenCount
-    const newItem = "<div class='list-item'><input class='form-check-input' type='checkbox' value='' id="+id+" onchange='onCheckBoxChange("+id+")' unchecked> <label class='form-check-label' for='"+id+"'> "+input.value+"</label> <button type=button' class='btn-close btn-close-white close' aria-label='Close' onclick='removeCheckbox("+id+")' style='float:right;'></button></div>"
+    const newItem = "<div class='list-item' id='"+id+"'><input class='form-check-input' type='checkbox' value='' id="+id+" onchange='onCheckBoxChange("+id+")' unchecked> <label class='form-check-label' for='"+id+"'> "+input.value+"</label> <button type=button' class='btn-close btn-close-white close' aria-label='Close' onclick='removeCheckbox("+id+")' style='float:right;'></button></div>"
     
     
     listContent.push([id,newItem,false])
@@ -25,9 +25,12 @@ function addCheckbox(){
 }
 
 function removeCheckbox(id){
-    listContent[(listContent.findIndex(e => e[0] === id))][1] = "<div></div>"
-
-    updateCheckbox()
+    $("#"+id).fadeOut(200)
+    
+    setTimeout(function(){
+        listContent[(listContent.findIndex(e => e[0] === id))][1] = "<div></div>"
+        updateCheckbox()
+    },250)
 }
 
 function updateCheckbox(){
